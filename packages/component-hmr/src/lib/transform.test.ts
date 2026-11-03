@@ -994,7 +994,7 @@ describe('transformComponentsForServer', () => {
     )
     assert.match(
       result.code,
-      /__remixComponentHmr__\.registerComponentForHmr\("file:\/\/\/app\/Counter\.tsx", "Counter", __remixComponentHmrImpl_Counter__\);/,
+      /Counter = __remixComponentHmr__\.registerComponentForHmr\("file:\/\/\/app\/Counter\.tsx", "Counter", __remixComponentHmrImpl_Counter__, Counter\);/,
     )
     assert.equal(result.code.includes('getComponentHmrState'), false)
     assert.equal(result.code.includes('setupComponentForHmr'), false)
@@ -1227,7 +1227,11 @@ function getGeneratedPublicWrapper(code: string, componentName: string): string 
   assert.notEqual(start, -1)
 
   let end = findFirstIndex(
-    [`\n__remixComponentHmr__.registerComponentForHmr`, `\nexport {\n`],
+    [
+      `\n${componentName} = __remixComponentHmr__.registerComponentForHmr`,
+      `\n__remixComponentHmr__.registerComponentForHmr`,
+      `\nexport {\n`,
+    ],
     code,
     start + 1,
   )

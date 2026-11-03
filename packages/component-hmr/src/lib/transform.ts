@@ -282,9 +282,9 @@ export function transformComponentsForServer(
         options.moduleUrl,
       )}, ${JSON.stringify(match.name)}).apply(undefined, arguments);`,
       `}`,
-      `__remixComponentHmr__.registerComponentForHmr(${JSON.stringify(
+      `${match.name} = __remixComponentHmr__.registerComponentForHmr(${JSON.stringify(
         options.moduleUrl,
-      )}, ${JSON.stringify(match.name)}, ${implementationName});`,
+      )}, ${JSON.stringify(match.name)}, ${implementationName}, ${match.name});`,
     ].join('\n')
 
     sourceMapHints.push({

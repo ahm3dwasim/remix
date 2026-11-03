@@ -1,0 +1,1 @@
+Keep server component identity stable across HMR updates so `handle.context.get(Provider)` and in-module identity checks (such as `node.type === Provider`) still match after the provider's own module is hot updated.
